@@ -45,8 +45,11 @@ def create_folder(path: str):
     """
     result = False
 
+    if os.path.exists(path):
+        return True
+
     try:
-        os.mkdirs(path)
+        os.makedirs(path)
         result = True
     except OSError as ex:
         log.error(ex, f"An error occurred while creating the folder in the path '{path}'.")
