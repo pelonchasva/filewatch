@@ -1,4 +1,5 @@
 ![build](https://github.com/pelonchasva/filewatch/workflows/build/badge.svg)
+[![codecov](https://codecov.io/gh/pelonchasva/filewatch/branch/master/graph/badge.svg)](https://codecov.io/gh/pelonchasva/filewatch)
 
 # filewatch
 
