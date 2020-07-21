@@ -1,30 +1,41 @@
 name: coverage
 
 on:
-    push:
-      branches: [ master ]
-    pull_request:
-      branches: [ master ]
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
-steps:
-  uses: actions/checkout@master
-  uses: codecov/codecov-action@v1.0.11
-  with:
-    # User defined upload name. Visible in Codecov UI
-    name: filewatch
-    # Repository upload token - get it from codecov.io. Required only for private repositories
-    token: #optional
-    # Path to coverage file to upload
-    file: # optional
-    # Comma-separated list of files to upload
-    files: # optional
-    # Directory to search for coverage reports.
-    directory: # optional
-    # Flag upload to group coverage metrics (e.g. unittests | integration | ui,chrome)
-    flags: # optional
-    # Write upload file to path before uploading
-    path_to_write_report: # optional
-    # Environment variables to tag the upload with (e.g. PYTHON | OS,PYTHON)
-    env_vars: # optional
-    # Specify whether or not CI build should fail if Codecov runs into an error during upload
-    fail_ci_if_error: # optional
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON: ${{ matrix.python-version }}
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Generate coverage report
+      run: |
+        pip install pytest
+        pip install pytest-cov
+        pytest --cov=./ --cov-report=xml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: # optional
+        file: ./coverage.xml
+        files: ./coverage1.xml,./coverage2.xml
+        directory: ./coverage/reports/
+        flags: unittests
+        env_vars: OS,PYTHON
+        name: codecov-umbrella
+        fail_ci_if_error: true
+        path_to_write_report: ./coverage/codecov_report.gz
