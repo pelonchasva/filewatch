@@ -1,4 +1,4 @@
-![filewatch](https://github.com/pelonchasva/filewatch/workflows/filewatch/badge.svg)
+![build](https://github.com/pelonchasva/filewatch/workflows/build/badge.svg)
 
 # filewatch
 
