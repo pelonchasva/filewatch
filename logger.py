@@ -51,6 +51,13 @@ class Logger(object):
         """
         Returns the path of the log file or creates one if needed
         """
+        # Check if log folders exists, otherwise create it
+        if not os.path.exists('./log'):
+            try:
+                os.mkdir('./log')
+            except OSError as ex:
+                print(f"Could not create folder './log'.")
+
         if not os.path.exists(path):
             with open(path, "w+") as f:
                 log_date = datetime.today()
