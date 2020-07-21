@@ -13,7 +13,7 @@ steps:
     # User defined upload name. Visible in Codecov UI
     name: filewatch
     # Repository upload token - get it from codecov.io. Required only for private repositories
-    token: 9ac0181b-8b11-4d2a-9f1f-f911a9519afd
+    token: #optional
     # Path to coverage file to upload
     file: # optional
     # Comma-separated list of files to upload
