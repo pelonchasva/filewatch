@@ -28,6 +28,7 @@ FILE_FOLDER_MAP = {
 
 def get_file_name(path: str):
     """
+    Gets the name of a file by a given file path.
     """
     filename = None
 
@@ -40,11 +41,12 @@ def get_file_name(path: str):
 
 def create_folder(path: str):
     """
+    Creates a folder in the given path if it does not exists.
     """
     result = False
 
     try:
-        os.mkdir(path)
+        os.mkdirs(path)
         result = True
     except OSError as ex:
         log.error(ex, f"An error occurred while creating the folder in the path '{path}'.")
